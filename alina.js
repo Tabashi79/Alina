@@ -52,11 +52,13 @@ const main = (async () => {
           attemptsUser++;
         }
         else if (parseInt(context.text.substr(4)) === numberRandom) {
+          attemptsUser++;
           await context.send(`Вы угадали с ${attemptsUser} попытки. Это число ${numberRandom}.`);
           // Новное случайное число, чтоб не перезапускать бота каздый раз для нового числа
           numberRandom = Math.round(Math.random() * 99) + 1;
         }
       }
+      // Тут команды
     });
   } catch (error) {
     console.log(error);
