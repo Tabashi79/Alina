@@ -1,7 +1,7 @@
 // 28.07.2022  11:48
 // Tabashi
 // File: alina.js
-// Version: 0.1
+// Version: 0.8
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -56,6 +56,8 @@ const main = (async () => {
           await context.send(`Вы угадали с ${attemptsUser} попытки. Это число ${numberRandom}.`);
           // Новное случайное число, чтоб не перезапускать бота каздый раз для нового числа
           numberRandom = Math.round(Math.random() * 99) + 1;
+          // Сбросить счетчик
+          attemptsUser = 0;
         }
       }
       // Тут команды
