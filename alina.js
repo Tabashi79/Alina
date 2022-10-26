@@ -24,6 +24,16 @@ let numberRandom = Math.round(Math.random() * 99) + 1;
 // Попытки пользователя
 let attemptsUser = 0;
 
+// Список игр
+let gamesList = [
+  'Final fight 3', 'Jurassic park', 'Pocky rocky', 'Poky Rocky 2', 'Run Saber',
+  'Sunset riders', 'Joe & mac', 'Doom troopers', 'Knights of the round',
+  'Legend of the mystical ninja', 'Final fight 2', 'Double Dragon 3',
+  'Skeleton Krew', 'Blades of Vengeance', 'Arcus Odyssey', 'Samurai Shodown'
+]
+
+let gameRandom;
+
 
 // Функция
 const main = (async () => {
@@ -60,7 +70,21 @@ const main = (async () => {
           attemptsUser = 0;
         }
       }
-      // Тут команды
+
+      // Рандомный выбор игры
+      if (context.text.substr(0, 7) === '-games') {
+        gameRandom = Math.round(Math.random() * (gamesList.length - 1));
+
+        await context.send(`В моём списке ${gamesList.length} игр.\nИграйте в ${gamesList[gameRandom]}.`);
+      }
+
+      // Помощь
+      if (context.text.substr(0, 6) === '-help') {
+        await context.send('Мои команды: (-wiki, -gn, -games, привет)\n\
+                           -wiki (введите одно слово и я найду это в википедии)\n\
+                           -gn (игра угадай число, введите -gn и ваше число (-gn 35))\n\
+                           -games (выберу вам игру)');
+      }
     });
   } catch (error) {
     console.log(error);
