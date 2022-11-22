@@ -1,7 +1,7 @@
 // 28.07.2022  11:48
 // Tabashi
 // File: alina.js
-// Version: 0.8
+// Version: 1.0
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -81,9 +81,9 @@ const main = (async () => {
       // Помощь
       if (context.text.substr(0, 6) === '-help') {
         await context.send('Мои команды: (-wiki, -gn, -games, привет)\n\
-                           -wiki (введите одно слово и я найду это в википедии)\n\
-                           -gn (игра угадай число, введите -gn и ваше число (-gn 35))\n\
-                           -games (выберу вам игру)');
+        -wiki (введите одно слово и я найду это в википедии)\n\
+        -gn (игра угадай число, введите -gn и ваше число (-gn 35))\n\
+        -games (выберу вам игру)');
       }
     });
   } catch (error) {
