@@ -9,6 +9,9 @@ const { VK, Context } = require('vk-io');
 const { HearManager } = require('@vk-io/hear');
 const wiki = require('wikipedia');
 const { content } = require('wikipedia');
+const GoogleImages = require('google-images');
+
+const client = new GoogleImages(process.env['CSE ID'], process.env['API KEY']);
 
 
 app.get('/', function(request, response) { response.send(`Монитор активен. Локальный адрес: http://localhost:${port}`); });
@@ -23,6 +26,8 @@ const bot = new HearManager();
 let numberRandom = Math.round(Math.random() * 99) + 1;
 // Попытки пользователя
 let attemptsUser = 0;
+
+let imageUrl;
 
 // Список игр
 let gamesList = [
@@ -72,10 +77,19 @@ const main = (async () => {
       }
 
       // Рандомный выбор игры
-      if (context.text.substr(0, 7) === '-games') {
+      if (context.text.substr(0, 6) === '-games') {
         gameRandom = Math.round(Math.random() * (gamesList.length - 1));
 
         await context.send(`В моём списке ${gamesList.length} игр.\nИграйте в ${gamesList[gameRandom]}.`);
+      }
+
+      // Поиск картинок
+      if (context.text.substr(0, 6) === '-image') {
+        client.search(context.text.substr(7), { size: 'large' }).then(result => {
+          let imageRandom = Math.round(Math.random() * result.length);
+
+          context.send(`${result[imageRandom].url}`);
+        });
       }
 
       // Помощь
